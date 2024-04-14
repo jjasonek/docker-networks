@@ -10,3 +10,10 @@ MongoNetworkError: failed to connect to server [localhost:27017] on first connec
   name: 'MongoNetworkError'
 }]
     at Pool.<anonymous> (/app/node_modules/mongodb/lib/core/topologies/server.js:441:11)
+
+## Lets try without the DB
+
+docker build -t favorites-node .
+run -d --rm --name favorites -p 3000:3000 favorites-node
+
+$ curl http://localhost:3000/people | jq
