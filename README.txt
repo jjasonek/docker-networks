@@ -47,3 +47,24 @@ docker container inspect mongodb
 ]
 
 ## That works but it's not convenient.
+
+docker stop favorites mongodb
+docker rm mongodb
+
+docker run -d --name mongodb --network favorites-net mongo
+47920e58b51085f5d501fb9fafc86063238e22f1b62ef3b95760f1a4a1c95d3e
+docker: Error response from daemon: network favorites-net not found.
+
+## we have to create the network on our own
+
+docker network create favorites-net
+docker network ls
+NETWORK ID     NAME            DRIVER    SCOPE
+edffa3a59832   bridge          bridge    local
+8352974c56c2   favorites-net   bridge    local
+57a477632d1e   host            host      local
+e462d5990d80   none            null      local
+
+
+docker run -d --name mongodb --network favorites-net mongo
+docker run -d --rm --name favorites -p 3000:3000 --network favorites-net favorites-node
