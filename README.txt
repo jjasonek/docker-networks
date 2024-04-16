@@ -17,3 +17,8 @@ docker build -t favorites-node .
 run -d --rm --name favorites -p 3000:3000 favorites-node
 
 $ curl http://localhost:3000/people | jq
+
+## with Mongo DB installed on localhost
+
+curl -X POST -H "Content-Type: application/json" -d '{"name": "Obi-Wan Kenobi", "type": "character", "url": "https://swapi.dev/api/people/10/"}' http://localhost:3000/favorites
+curl http://localhost:3000/favorites | jq
