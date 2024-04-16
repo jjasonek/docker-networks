@@ -22,3 +22,28 @@ $ curl http://localhost:3000/people | jq
 
 curl -X POST -H "Content-Type: application/json" -d '{"name": "Obi-Wan Kenobi", "type": "character", "url": "https://swapi.dev/api/people/10/"}' http://localhost:3000/favorites
 curl http://localhost:3000/favorites | jq
+
+
+## now let's stop the local MongoDB and let's use a Mongo image.
+
+docker run -d --name mongodb mongo
+
+docker container inspect mongodb
+[
+    {
+        "Id": "a20c3a014bfdfb24786462bbac8e72c563b48b1355b07f5cef97ae1b32ec8128",
+        "Created": "2024-04-16T16:51:35.363639887Z",
+        "Path": "docker-entrypoint.sh",
+        "Args": [
+            "mongod"
+        ],
+       ...
+        "NetworkSettings": {
+            ...
+            "IPAddress": "172.17.0.2",
+            ...
+        }
+    }
+]
+
+## That works but it's not convenient.
